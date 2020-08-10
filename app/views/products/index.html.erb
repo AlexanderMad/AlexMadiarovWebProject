@@ -1,0 +1,36 @@
+<h1>Listing <small><%= link_to "Add New Product", new_product_path, class: "btn btn-sm btn-secondary" %></small></h1>
+
+<div class="row row-cols-1 row-cols-md-3">
+  <% @products.each do |product| %>
+    <div class="col mb-4">
+      <div class="card">
+        <%= image_tag product.image, :class => "card-img-top" %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to product.title, product_path(product) %></h5>
+
+          <p>Price: <strong><%= product.price %> USD</strong></p>
+          <br/>
+          <p class="card-text">
+            <%= product.description %>
+          </p>
+
+          <div class="card-footer">
+            <small class="text-muted">
+
+              <%= link_to 'Add To Cart', add_to_cart_product_path(product.id), class: "btn btn-primary" %>
+              <hr/>
+
+              <%= link_to 'Show', product_path(product), class: "btn btn-secondary btn-sm" %>
+              <%= link_to 'Edit', edit_product_path(product), class: "btn btn-secondary btn-sm" %>
+              <%= link_to 'Destroy', product_path(product),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'},
+                          class: "btn btn-danger btn-sm" %>
+
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
